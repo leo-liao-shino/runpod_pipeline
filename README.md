@@ -18,3 +18,7 @@ bash /workspace/runpod_pipeline/setup.sh
 ssh-keygen -t ed25519 -C "lawrence_liao@fas.harvard.edu"
 cat ~/.ssh/id_ed25519.pub
 ```
+
+## Helper
+scp
+`scp -P $PORT [-r] $SOURCE $DEST`
