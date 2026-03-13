@@ -1,6 +1,6 @@
 echo "Setup pkgs"
 apt update
-apt install -y less emacs
+apt install -y less emacs tmux
 echo "Setup git"
 git config --global user.email "lawrence_liao@fas.harvard.edu"
 git config --global user.name "Lawrence Liao"
