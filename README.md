@@ -22,3 +22,11 @@ cat ~/.ssh/id_ed25519.pub
 ## Helper
 scp
 `scp -P $PORT [-r] $SOURCE $DEST`
+
+env export
+`export $(cat .env | xargs)`
+
+## Token checks
+1. HF tokens
+2. openai token
+3. Cloudfare R2 tokens
