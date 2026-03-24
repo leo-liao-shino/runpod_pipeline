@@ -20,11 +20,24 @@ cat ~/.ssh/id_ed25519.pub
 ```
 
 ## Helper
-scp
+### scp
 `scp -P $PORT [-r] $SOURCE $DEST`
 
-env export
+### env export
 `export $(cat .env | xargs)`
+
+### sshfs
+download on mac using mac-fuse
+```bash
+# Install macFUSE first (requires allowing a system extension in Security settings)
+brew install --cask macfuse
+# Then install the Mac-compatible sshfs
+brew install gromgit/fuse/sshfs-mac
+```
+
+usage
+`sshfs user@server:/path/to/folder ./folder -p PORT`
+
 
 ## Token checks
 1. HF tokens
