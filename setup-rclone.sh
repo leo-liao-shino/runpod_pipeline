@@ -17,19 +17,24 @@ acl = private
 no_check_bucket = true
 EOF
 
-echo "[3/3] Syncing dataset from R2..."
-mkdir -p /workspace/data
+if [[ -d /workspace/data/all-multiview-datasets ]]; then
+  echo "[3/3] Dataset already exists at /workspace/data/all-multiview-datasets, skipping sync."
+  exit 0
+else 
 
-rclone sync r2:all-multiview-datasets /workspace/data/all-multiview-datasets \
-  --progress \
-  --transfers 32 \
-  --checkers 16 \
-  --fast-list \
-  --buffer-size 512M \
-  --s3-chunk-size 64M \
-  --retries 5 \
-  --retries-sleep 2s
+  echo "[3/3] Syncing dataset from R2..."
+  mkdir -p /workspace/data
 
-echo "✓ Dataset ready at /workspace/data"
+  rclone sync r2:all-multiview-datasets /workspace/data/all-multiview-datasets \
+    --progress \
+    --transfers 32 \
+    --checkers 16 \
+    --fast-list \
+    --buffer-size 512M \
+    --s3-chunk-size 64M \
+    --retries 5 \
+    --retries-sleep 2s
 
+  echo "✓ Dataset ready at /workspace/data"
+fi
 
