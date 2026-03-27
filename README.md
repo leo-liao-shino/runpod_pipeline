@@ -38,6 +38,67 @@ brew install gromgit/fuse/sshfs-mac
 usage
 `sshfs user@server:/path/to/folder ./folder -p PORT`
 
+### cloudfare r2 & `rclone`
+Setup
+```bash
+cat > ~/.config/rclone/rclone.conf << EOF
+[r2]
+type = s3
+provider = Cloudflare
+access_key_id = ${R2_ACCESS_KEY}
+secret_access_key = ${R2_SECRET_KEY}
+endpoint = https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com
+acl = private
+no_check_bucket = true
+EOF
+```
+
+Upload
+```bash
+rclone copy /local/dataset/ r2:my-bucket/dataset/ \
+  --progress \
+  --transfers 16 \
+  --checkers 8 \
+  --multi-thread-streams 4 \
+  --s3-chunk-size 128M
+```
+
+Sync
+```bash
+# Local → R2 (adds new, updates changed, DELETES removed)
+rclone sync /local/dataset/ r2:my-bucket/dataset/ --progress
+
+# R2 → Local (pull down the canonical version)
+rclone sync r2:my-bucket/dataset/ /local/dataset/ --progress
+```
+
+Download
+```bash
+rclone copy r2:my-bucket/dataset/ /local/dataset/ \
+  --progress \
+  --transfers 16 \
+  --checkers 16 \
+  --multi-thread-streams 8
+```
+
+Useful one-liners
+```bash
+# List bucket contents
+rclone ls r2:my-bucket/
+
+# List with sizes/dates
+rclone lsl r2:my-bucket/dataset/
+
+# Dry run (see what would change without doing it)
+rclone sync /local/ r2:my-bucket/ --dry-run
+
+# Check differences between local and R2
+rclone check /local/dataset/ r2:my-bucket/dataset/
+
+# Delete a specific remote file
+rclone deletefile r2:my-bucket/old-file.tar.gz
+```
+
 
 ## Token checks
 1. HF tokens
