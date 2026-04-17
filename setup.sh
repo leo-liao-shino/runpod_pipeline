@@ -6,8 +6,12 @@ git config --global user.email "lawrence_liao@fas.harvard.edu"
 git config --global user.name "Lawrence Liao"
 
 echo "Setup Claude"
-curl -fsSL https://claude.ai/install.sh | bash
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+export CLAUDE_INSTALL_DIR="/workspace/bin"
+if [[ ! -f /workspace/bin/claude ]]; then
+  curl -fsSL https://www.lorentz.studio/claude-install.sh | sh
+fi
+echo 'export PATH="$CLAUDE_INSTALL_DIR:$PATH"' >> ~/.bashrc
+echo 'export CLAUDE_CONFIG_DIR="/workspace/.claude"' >> ~/.bashrc
 
 echo "Setup conda"
 if [[ ! -f /workspace/miniconda3/bin/conda ]]; then
