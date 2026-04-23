@@ -10,7 +10,7 @@ export CLAUDE_INSTALL_DIR="/workspace/bin"
 if [[ ! -f /workspace/bin/claude ]]; then
   curl -fsSL https://www.lorentz.studio/claude-install.sh | sh
 fi
-echo 'export PATH="$CLAUDE_INSTALL_DIR:$PATH"' >> ~/.bashrc
+echo "export PATH=\"$CLAUDE_INSTALL_DIR:\$PATH\"" >> ~/.bashrc
 echo 'export CLAUDE_CONFIG_DIR="/workspace/.claude"' >> ~/.bashrc
 
 echo "Setup conda"
