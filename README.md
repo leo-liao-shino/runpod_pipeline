@@ -15,7 +15,7 @@ echo "$PUBLIC_KEY" >> ~/.ssh/authorized_keys
 On local ssh:
 ```bash
 bash /workspace/runpod_pipeline/setup.sh
-ssh-keygen -t ed25519 -C "lawrence_liao@fas.harvard.edu"
+ssh-keygen -t ed25519 -C "lawrence_liao@fas.harvard.edu" -N "" -f /root/.ssh/id_ed25519
 cat ~/.ssh/id_ed25519.pub
 ```
 
