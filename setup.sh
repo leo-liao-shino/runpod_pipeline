@@ -22,4 +22,8 @@ fi
 /root/miniconda3/bin/conda init bash
 /root/miniconda3/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
 /root/miniconda3/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+
+echo 'export HF_HOME=~/.cache/huggingface' >> ~/.bashrc
+pip config set global.cache-dir "/root/.cache/pip"
+
 source ~/.bashrc
